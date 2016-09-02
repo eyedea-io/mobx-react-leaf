@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class AboutRoute extends React.Component {
+export default class About extends React.Component {
   render() {
     return (
       <div>About</div>
