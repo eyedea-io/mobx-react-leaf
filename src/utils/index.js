@@ -1,0 +1,1 @@
+export { configureRoutes } from './configureRoutes';
