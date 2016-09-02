@@ -5,7 +5,7 @@ const createRoute = (path, importComponent) => ({
   },
 });
 
-export function configureRoutes(basicRoutes, advancedRoutes = []) {
+export default function configureRoutes(basicRoutes, advancedRoutes = []) {
   return Object
     .keys(basicRoutes)
     .reduce((routes, path) =>
