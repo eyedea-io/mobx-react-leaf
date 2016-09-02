@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { connect, observer } from 'utils';
+import { connect, observer, theme } from 'utils';
 
 @observer
 @connect(({ userStore, uiStore }) => ({
@@ -7,6 +7,7 @@ import { connect, observer } from 'utils';
   setLanguage: uiStore.setLanguage,
   helloMessage: userStore.helloMessage,
 }))
+@theme('Default')
 export default class Landing extends Component {
   static propTypes = {
     language: PropTypes.string,
