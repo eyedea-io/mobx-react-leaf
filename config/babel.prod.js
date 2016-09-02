@@ -10,6 +10,8 @@ module.exports = {
   plugins: [
     // @decorator class MyClass {}
     require.resolve('babel-plugin-transform-decorators-legacy'),
+    // export Module from './Module'
+    require.resolve('babel-plugin-transform-export-extensions'),
     // class { handleClick = () => { } }
     require.resolve('babel-plugin-transform-class-properties'),
     // { ...todo, completed: true }
