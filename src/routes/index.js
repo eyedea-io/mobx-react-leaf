@@ -4,6 +4,7 @@ import { configureRoutes } from 'utils';
 const basicRoutes = {
   '/': System.import('./Landing'),
   about: System.import('./About'),
+  '*': System.import('./NotFound'),
 };
 
 // Here you can define custom routes that require additional setup
