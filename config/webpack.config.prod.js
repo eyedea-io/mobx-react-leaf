@@ -1,5 +1,4 @@
 const path = require('path');
-const autoprefixer = require('autoprefixer');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -7,6 +6,10 @@ const url = require('url');
 const paths = require('./paths');
 const env = require('./env');
 const babelQuery = require('./babel.prod');
+
+// PostCSS plugins
+const cssnext = require('postcss-cssnext');
+const postcssFocus = require('postcss-focus');
 
 const modules = [
   'src',
@@ -119,8 +122,21 @@ module.exports = {
         // Webpack 1.x uses Uglify plugin as a signal to minify *all* the assets
         // including CSS. This is confusing and will be removed in Webpack 2:
         // https://github.com/webpack/webpack/issues/283
-        loader: ExtractTextPlugin.extract('style', 'css?-autoprefixer!postcss'),
+        loader: ExtractTextPlugin.extract(
+          'style-loader',
+          'css-loader?modules&-autoprefixer&importLoaders=1!postcss-loader'
+        ),
         // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
+      },
+      {
+        // Do not transform vendor's CSS with CSS-modules
+        // The point is that they remain in global scope.
+        // Since we require these CSS files in our JS or CSS files,
+        // they will be a part of our compilation either way.
+        // So, no need for ExtractTextPlugin here.
+        test: /\.css$/,
+        include: paths.appNodeModules,
+        loaders: ['style-loader', 'css-loader'],
       },
       // JSON is not enabled by default in Webpack but both Node and Browserify
       // allow it implicitly so we also enable it.
@@ -161,13 +177,9 @@ module.exports = {
   },
   // We use PostCSS for autoprefixing only.
   postcss: () => [
-    autoprefixer({
-      browsers: [
-        '>1%',
-        'last 4 versions',
-        'Firefox ESR',
-        'not ie < 9', // React doesn't support IE8 anyway
-      ],
+    postcssFocus(), // Add a :focus to every :hover
+    cssnext({ // Allow future CSS features to be used, also auto-prefixes the CSS...
+      browsers: ['last 2 versions', 'IE > 10'], // ...based on this browser list
     }),
   ],
   plugins: [

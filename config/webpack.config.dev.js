@@ -1,5 +1,4 @@
 const path = require('path');
-const autoprefixer = require('autoprefixer');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
@@ -7,6 +6,10 @@ const WatchMissingNodeModulesPlugin = require('../scripts/utils/WatchMissingNode
 const paths = require('./paths');
 const env = require('./env');
 const babelQuery = require('./babel.dev');
+
+// PostCSS plugins
+const cssnext = require('postcss-cssnext');
+const postcssFocus = require('postcss-focus');
 
 const modules = [
   'src',
@@ -92,9 +95,19 @@ module.exports = {
       // In production, we use a plugin to extract that CSS to a file, but
       // in development "style" loader enables hot editing of CSS.
       {
+        test: /\.s?css$/,
+        include: paths.appSrc,
+        loader: 'style!css?localIdentName=[local]__[path][name]__[hash:base64:5]&modules&importLoaders=1&sourceMap!postcss',
+      },
+      {
+        // Do not transform vendor's CSS with CSS-modules
+        // The point is that they remain in global scope.
+        // Since we require these CSS files in our JS or CSS files,
+        // they will be a part of our compilation either way.
+        // So, no need for ExtractTextPlugin here.
         test: /\.css$/,
-        include: [paths.appSrc, paths.appNodeModules],
-        loader: 'style!css!postcss',
+        include: paths.appNodeModules,
+        loaders: ['style-loader', 'css-loader'],
       },
       // JSON is not enabled by default in Webpack but both Node and Browserify
       // allow it implicitly so we also enable it.
@@ -134,13 +147,9 @@ module.exports = {
   },
   // We use PostCSS for autoprefixing only.
   postcss: () => [
-    autoprefixer({
-      browsers: [
-        '>1%',
-        'last 4 versions',
-        'Firefox ESR',
-        'not ie < 9', // React doesn't support IE8 anyway
-      ],
+    postcssFocus(), // Add a :focus to every :hover
+    cssnext({ // Allow future CSS features to be used, also auto-prefixes the CSS...
+      browsers: ['last 2 versions', 'IE > 10'], // ...based on this browser list
     }),
   ],
   plugins: [
