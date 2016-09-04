@@ -1,3 +1,4 @@
+/* eslint-disable no-var, vars-on-top */
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -28,7 +29,7 @@ if (env['process.env.NODE_ENV'] !== '"production"') {
 // We can't use a relative path in HTML because we don't want to load something
 // like /todos/42/static/js/bundle.7289d.js. We have to know the root.
 const homepagePath = require(paths.appPackageJson).homepage;
-let publicPath = homepagePath ? url.parse(homepagePath).pathname : '/';
+var publicPath = homepagePath ? url.parse(homepagePath).pathname : '/';
 if (!publicPath.endsWith('/')) {
   // If we don't do this, file assets will get incorrect paths.
   publicPath += '/';
@@ -112,8 +113,8 @@ module.exports = {
       // use the "style" loader inside the async code so CSS from them won't be
       // in the main CSS file.
       {
-        test: /\.css$/,
-        include: [paths.appSrc, paths.appNodeModules],
+        test: /\.s?css$/,
+        include: [paths.appSrc],
         // "?-autoprefixer" disables autoprefixer in css-loader itself:
         // https://github.com/webpack/css-loader/issues/281
         // We already have it thanks to postcss. We only pass this flag in
