@@ -75,13 +75,6 @@ module.exports = {
       'main',
     ],
   },
-  // Resolve loaders (webpack plugins for CSS, images, transpilation) from the
-  // directory of `react-scripts` itself rather than the project directory.
-  // You can remove this after ejecting.
-  resolveLoader: {
-    root: paths.ownNodeModules,
-    moduleTemplates: ['*-loader'],
-  },
   module: {
     // First, run the linter.
     // It's important to do this before Babel processes the JS.
