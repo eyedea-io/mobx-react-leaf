@@ -96,7 +96,7 @@ module.exports = {
       {
         test: /\.s?css$/,
         include: paths.appSrc,
-        loader: 'style!css?localIdentName=[local]__[path][name]__[hash:base64:5]&modules&importLoaders=1&sourceMap!postcss',
+        loader: 'style-loader!css-loader?localIdentName=[local]__[path][name]__[hash:base64:5]&modules&importLoaders=1&sourceMap!postcss-loader!sass-loader',
       },
       {
         // Do not transform vendor's CSS with CSS-modules

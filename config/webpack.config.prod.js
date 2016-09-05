@@ -118,7 +118,7 @@ module.exports = {
         // https://github.com/webpack/webpack/issues/283
         loader: ExtractTextPlugin.extract(
           'style-loader',
-          'css-loader?modules&-autoprefixer&importLoaders=1!postcss-loader'
+          'css-loader?modules&-autoprefixer&importLoaders=1!postcss-loader!sass-loader'
         ),
         // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
       },
