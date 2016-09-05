@@ -12,7 +12,7 @@ const cssnext = require('postcss-cssnext');
 const postcssFocus = require('postcss-focus');
 
 const modules = [
-  'src',
+  'plant',
   'node_modules',
 ];
 

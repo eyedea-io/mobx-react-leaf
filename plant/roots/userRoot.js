@@ -1,10 +1,10 @@
 import { computed } from 'utils';
 
-export default class userStore {
+export default class userRoot {
   @computed get helloMessage() {
     return {
       en: 'Hello',
       pl: 'Cześć',
-    }[this.stores.uiStore.language];
+    }[this.roots.uiRoot.language];
   }
 }

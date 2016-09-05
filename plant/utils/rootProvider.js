@@ -1,22 +1,22 @@
 import { Component, PropTypes, Children } from 'react';
 
-export default class StoreProvider extends Component {
+export default class RootProvider extends Component {
   static propTypes = {
-    store: PropTypes.object.isRequired,
+    root: PropTypes.object.isRequired,
     children: PropTypes.element.isRequired,
   }
 
   static childContextTypes = {
-    store: PropTypes.object.isRequired,
+    root: PropTypes.object.isRequired,
   }
 
   constructor(props, context) {
     super(props, context);
-    this.store = props.store;
+    this.root = props.root;
   }
 
   getChildContext() {
-    return { store: this.store };
+    return { root: this.root };
   }
 
   render() {

@@ -1,11 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import { connect, observer, theme } from 'utils';
+import { Button } from 'leafs';
 
 @observer
-@connect(({ userStore, uiStore }) => ({
-  language: uiStore.language,
-  setLanguage: uiStore.setLanguage,
-  helloMessage: userStore.helloMessage,
+@connect(({ userRoot, uiRoot }) => ({
+  language: uiRoot.language,
+  setLanguage: uiRoot.setLanguage,
+  helloMessage: userRoot.helloMessage,
 }))
 @theme('Default')
 export default class Landing extends Component {
@@ -21,9 +22,10 @@ export default class Landing extends Component {
     return (
       <div>
         <p>{helloMessage}</p>
-        <button
+        <Button
+          className="btn--primary"
           onClick={() => setLanguage(language === 'en' ? 'pl' : 'en')}
-        >Toggle language</button>
+        >Toggle language</Button>
       </div>
     );
   }
