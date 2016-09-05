@@ -14,6 +14,12 @@
 2. Install dependencies using `npm install`
 3. Run `npm start` and open `http://localhost:3000` to see example.
 
+## Acknowledgements
+
+We are grateful to the authors of existing related project:
+
+* [FacebookIncubator/create-react-app](https://github.com/facebookincubator/create-react-app) - for great starting config and script files.
+
 ## License
 
 MIT License
