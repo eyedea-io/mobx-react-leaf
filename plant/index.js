@@ -5,6 +5,8 @@ import { RootProvider as Ground } from 'utils';
 import nodes from 'nodes';
 import roots from 'roots';
 
+import 'styles/styles.scss';
+
 render(
   <Ground roots={roots}>
     <Plant history={browserHistory} routes={nodes} />
