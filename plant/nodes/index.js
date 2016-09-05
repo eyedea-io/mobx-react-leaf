@@ -7,7 +7,13 @@ const basicNodes = {
   '*': System.import('./NotFound'),
 };
 
-// Here you can define custom routes that require additional setup
+// Here you can define custom routes that require additional setup.
+// Routing is based on react-router, so example entry would look like this:
+//   {
+//     path: 'contact',
+//     component: About,
+//     onEnter: () => {},
+//   },
 const advancedNodes = [];
 
 export default {
