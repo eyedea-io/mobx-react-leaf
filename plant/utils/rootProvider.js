@@ -2,21 +2,21 @@ import { Component, PropTypes, Children } from 'react';
 
 export default class RootProvider extends Component {
   static propTypes = {
-    root: PropTypes.object.isRequired,
+    roots: PropTypes.object.isRequired,
     children: PropTypes.element.isRequired,
   }
 
   static childContextTypes = {
-    root: PropTypes.object.isRequired,
+    roots: PropTypes.object.isRequired,
   }
 
   constructor(props, context) {
     super(props, context);
-    this.root = props.root;
+    this.roots = props.roots;
   }
 
   getChildContext() {
-    return { root: this.root };
+    return { roots: this.roots };
   }
 
   render() {

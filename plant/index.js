@@ -1,13 +1,13 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { Router, browserHistory } from 'react-router';
+import { render } from 'react-dom';
+import { Router as Plant, browserHistory } from 'react-router';
+import { RootProvider as Ground } from './utils';
 import nodes from './nodes';
 import roots from './roots';
-import { RootProvider } from './utils';
 
-ReactDOM.render(
-  <RootProvider root={roots}>
-    <Router history={browserHistory} routes={nodes} />
-  </RootProvider>,
+render(
+  <Ground roots={roots}>
+    <Plant history={browserHistory} routes={nodes} />
+  </Ground>,
   document.getElementById('plant')
 );

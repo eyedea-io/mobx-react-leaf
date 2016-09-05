@@ -25,16 +25,16 @@ export function connect(...mapRootsToProps) {
   return function wrapWithConnect(ComposedComponent) {
     class Connect extends Component {
       static propTypes = {
-        root: PropTypes.object,
+        roots: PropTypes.object,
       }
 
       static contextTypes = {
-        root: PropTypes.object,
+        roots: PropTypes.object,
       }
 
       constructor(props, context) {
         super(props, context);
-        this.root = props.root || context.root;
+        this.roots = props.roots || context.roots;
       }
 
       render() {
@@ -42,14 +42,14 @@ export function connect(...mapRootsToProps) {
 
         // Handle: @connect(({ uiRoot, userRoot }) => ({}))
         if (typeof mapRootsToProps[0] === 'function') {
-          filteredRoots = mapRootsToProps[0](this.root);
+          filteredRoots = mapRootsToProps[0](this.roots);
         } else {
           // Handle: @connect('uiRoot', 'userRoot')
-          filteredRoots = Object.keys(this.root)
+          filteredRoots = Object.keys(this.roots)
             .filter(key => mapRootsToProps.indexOf(key) >= 0)
             .reduce((obj, key) => ({
               ...obj,
-              [key]: this.root[key],
+              [key]: this.roots[key],
             }), {});
         }
 
