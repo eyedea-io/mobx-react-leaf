@@ -5,7 +5,7 @@
   <sub>Made by <a href="https://twitter.com/idered">Kasper Mikiewicz</a> for <a href="https://github.com/eyedea-io">Eyedea</a>.
 </div>
 
-![](https://cloud.githubusercontent.com/assets/230404/18255486/75caeeca-73aa-11e6-97bd-2a798a884e3d.png)
+![](https://cloud.githubusercontent.com/assets/230404/18267749/e6386f18-7420-11e6-913c-f2d44ac8d4b7.png)
 <br>
 
 ## Quick start
