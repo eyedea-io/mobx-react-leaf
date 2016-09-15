@@ -3,12 +3,13 @@ import 'styles/styles.scss';
 import React from 'react';
 import { render } from 'react-dom';
 import { Router as Plant, browserHistory } from 'react-router';
-import { RootProvider as Ground } from 'utils';
+import { Provider as Ground } from 'utils';
 import nodes from 'nodes';
-import roots from 'roots';
+import store from './store';
+import services from './services';
 
 render(
-  <Ground roots={roots}>
+  <Ground store={store} services={services}>
     <Plant history={browserHistory} routes={nodes} />
   </Ground>,
   document.getElementById('plant')

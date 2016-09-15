@@ -8,9 +8,9 @@ import styles from './styles.scss';
 const cn = classNames.bind(styles);
 
 @observer
-@connect(({ uiRoot }) => ({
-  language: uiRoot.language,
-  setLanguage: uiRoot.setLanguage,
+@connect(({ store, services }) => ({
+  language: store.app.language,
+  setLanguage: services.app.setLanguage,
 }))
 export default class Header extends Component {
   static propTypes = {

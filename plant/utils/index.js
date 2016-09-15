@@ -1,6 +1,6 @@
 export configureNodes from './routing';
-export { configureRoots, connect } from './root';
-export RootProvider from './rootProvider';
+export { connect } from './connect';
+export { Provider } from './provider';
 export theme from './theme';
 export form from './form';
 export request from './request';
