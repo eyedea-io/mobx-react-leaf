@@ -1,9 +1,9 @@
+import App from './App';
 import { configureNodes } from 'utils';
 
 // Create object with basic routes that simply map path to node
 const basicNodes = {
   '/': System.import('./Landing'),
-  about: System.import('./About'),
   '*': System.import('./NotFound'),
 };
 
@@ -17,5 +17,6 @@ const basicNodes = {
 const advancedNodes = [];
 
 export default {
+  component: App,
   childRoutes: configureNodes(basicNodes, advancedNodes),
 };

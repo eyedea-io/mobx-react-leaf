@@ -33,9 +33,6 @@ export default class Header extends Component {
               <Link className={cn('Nav__item-link')} to="/">Home</Link>
             </li>
             <li className={cn('Nav__item')}>
-              <Link className={cn('Nav__item-link')} to="/about">About</Link>
-            </li>
-            <li className={cn('Nav__item')}>
               <Button
                 className="btn--primary"
                 onClick={() => setLanguage(language === 'en' ? 'pl' : 'en')}
