@@ -39,14 +39,15 @@ $headings: (
 @import "generic.normalize";
 @import "generic.reset";
 
-/**
- * #BASE
- */
-@import "base.headings";
-@import "base.images";
-@import "base.page";
 
 :global {
+  /**
+  * #BASE
+  */
+  @import "base.headings";
+  @import "base.images";
+  @import "base.page";
+
   /**
    * #TRUMPS
    */
