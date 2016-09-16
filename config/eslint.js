@@ -54,6 +54,7 @@ module.exports = {
     'no-nested-ternary': 0,
     'no-use-before-define': 0,
     'prefer-template': 2,
+    'react/jsx-first-prop-new-line': 0,
     'react/jsx-filename-extension': 0,
     'react/jsx-no-target-blank': 0,
     'react/require-extension': 0,

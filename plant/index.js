@@ -1,16 +1,24 @@
+// Global styles
 import 'styles/styles.scss';
 
 import React from 'react';
-import { render } from 'react-dom';
-import { Router as Plant, browserHistory } from 'react-router';
+import ReactDOM from 'react-dom';
+// Provider inserts store and services into context of childrens
 import { Provider as Ground } from 'utils';
-import nodes from 'nodes';
+// App routing
+import { BrowserRouter as Plant } from 'react-router';
+// App routes
+import Nodes from './nodes';
+// Single source of data
 import store from './store';
+// Functions that operate on data in store
 import services from './services';
 
-render(
+ReactDOM.render(
   <Ground store={store} services={services}>
-    <Plant history={browserHistory} routes={nodes} />
+    <Plant>
+      <Nodes />
+    </Plant>
   </Ground>,
   document.getElementById('plant')
 );
