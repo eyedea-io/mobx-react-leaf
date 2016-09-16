@@ -4,6 +4,7 @@
   "devDependencies": {
     "babel-core": "6.14.0",
     "babel-eslint": "6.1.2",
+    "babel-jest": "^15.0.0",
     "babel-loader": "6.2.5",
     "babel-plugin-transform-class-properties": "6.11.5",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
@@ -36,6 +37,7 @@
     "gzip-size": "3.0.0",
     "html-webpack-plugin": "2.22.0",
     "ip": "^1.1.3",
+    "jest": "^15.1.1",
     "json-loader": "0.5.4",
     "node-sass": "^3.9.0",
     "object-assign": "4.1.0",
@@ -67,9 +69,32 @@
   "scripts": {
     "start": "node ./scripts/start.js",
     "build": "node ./scripts/build.js",
-    "test": "exit 0"
+    "test": "jest --watch --env=jsdom"
   },
   "eslintConfig": {
     "extends": "./config/eslint.js"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "jsx",
+      "js"
+    ],
+    "moduleNameMapper": {
+      "^[./a-zA-Z0-9$_-]+\\.(jpg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm)$": "<rootDir>\\config\\jest\\FileStub.js",
+      "^[./a-zA-Z0-9$_-]+\\.s?css$": "<rootDir>\\config\\jest\\CSSStub.js"
+    },
+    "scriptPreprocessor": "<rootDir>\\config\\jest\\transform.js",
+    "setupFiles": [
+      "<rootDir>\\config\\polyfills.js"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "plant"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/(build|node_modules|config|scripts)/"
+    ],
+    "testEnvironment": "node",
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(js|jsx)$"
   }
 }

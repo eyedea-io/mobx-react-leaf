@@ -1,12 +1,15 @@
 const path = require('path');
 
 module.exports = {
+  root: true,
   parser: 'babel-eslint',
   extends: 'airbnb',
   env: {
     browser: true,
     node: true,
+    commonjs: true,
     es6: true,
+    jest: true,
   },
   plugins: [
     'react',
@@ -17,6 +20,8 @@ module.exports = {
     sourceType: 'module',
     ecmaFeatures: {
       jsx: true,
+      generators: true,
+      experimentalObjectRestSpread: true,
     },
   },
   rules: {
