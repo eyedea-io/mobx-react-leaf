@@ -2,23 +2,29 @@
 import 'styles/styles.scss';
 
 import React from 'react';
-import ReactDOM from 'react-dom';
-// Provider inserts store and services into context of childrens
-import { Provider as Ground } from 'utils';
-// App routing
-import { BrowserRouter as Plant } from 'react-router';
-// App routes
-import Nodes from './nodes';
-// Single source of data
-import store from './store';
-// Functions that operate on data in store
-import services from './services';
+import { render } from 'react-dom';
+import { AppContainer } from 'react-hot-loader';
+import Root from 'nodes/Root';
 
-ReactDOM.render(
-  <Ground store={store} services={services}>
-    <Plant>
-      <Nodes />
-    </Plant>
-  </Ground>,
-  document.getElementById('plant')
+const $root = document.getElementById('plant');
+
+render(
+  <AppContainer>
+    <Root />
+  </AppContainer>,
+  $root
 );
+
+if (module.hot) {
+  module.hot.accept('nodes/Root', () => {
+    // Reloading doesn't work without this line
+    require('nodes/Root'); // eslint-disable-line
+
+    render(
+      <AppContainer>
+        <Root />
+      </AppContainer>,
+      $root
+    );
+  });
+}

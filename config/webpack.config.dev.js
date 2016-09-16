@@ -32,13 +32,14 @@ module.exports = {
     // low-level so we need to put all the pieces together. The runtime listens
     // to the events received by the client above, and applies updates (such as
     // new CSS) to the running application.
-    'webpack-hot-middleware/client',
+    require.resolve('webpack-hot-middleware/client'),
+    require.resolve('react-hot-loader/patch'),
     // We ship a few polyfills by default.
     require.resolve('./polyfills'),
     // Finally, this is your app's code:
     path.join(paths.appSrc, 'index'),
     // We include the app code last so that if there is a runtime error during
-    // initialization, it doesn't blow up the WebpackDevServer client, and
+    // initialization, it doesn't blow up the server client, and
     // changing JS code would still trigger a refresh.
   ],
   output: {
