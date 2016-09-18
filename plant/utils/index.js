@@ -1,4 +1,3 @@
-export configureNodes from './routing';
 export { connect } from './connect';
 export { Provider } from './provider';
 export theme from './theme';
