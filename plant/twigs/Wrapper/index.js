@@ -1,23 +1,17 @@
-import React, { Component, PropTypes } from 'react';
-import classNames from 'classnames/bind';
+import React, { PropTypes } from 'react';
 import styles from './styles.scss';
 
-const cn = classNames.bind(styles);
+const cn = require('classnames/bind').bind(styles);
 
-export default class Wrapper extends Component {
-  static propTypes = {
-    children: PropTypes.node,
-    className: PropTypes.string,
-  }
+const Wrapper = ({ children, className }) => (
+  <div className={cn('Wrapper', className)}>
+    {children}
+  </div>
+);
 
-  render() {
-    return (
-      <div
-        {...this.props}
-        className={cn('Wrapper', this.props.className)}
-      >
-        {this.props.children}
-      </div>
-    );
-  }
-}
+Wrapper.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+};
+
+export default Wrapper;
