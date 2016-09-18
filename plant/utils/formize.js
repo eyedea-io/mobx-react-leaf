@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { observer } from 'utils';
 import coercer from 'coercer';
 import ZSchema from 'z-schema';
-import * as FormRules from './form.rules';
+import * as FormRules from './formize.rules';
 
 export function form(opts) {
   const validator = new ZSchema({
