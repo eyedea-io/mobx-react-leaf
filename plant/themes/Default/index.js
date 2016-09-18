@@ -1,19 +1,17 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import { Header, Wrapper } from 'twigs';
 
-export default class Default extends Component {
-  static propTypes = {
-    children: PropTypes.node,
-  }
+const Default = ({ children }) => (
+  <div>
+    <Header />
+    <Wrapper className="pv">
+      {children}
+    </Wrapper>
+  </div>
+);
 
-  render() {
-    return (
-      <div>
-        <Header />
-        <Wrapper className="pv">
-          {this.props.children}
-        </Wrapper>
-      </div>
-    );
-  }
-}
+Default.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+export default Default;
