@@ -1,23 +1,18 @@
-import React, { Component, PropTypes } from 'react';
-import { connect, observer, theme } from 'utils';
+import React, { PropTypes } from 'react';
+import { connect } from 'utils';
 
-@theme('Default')
-@connect(({ store }) => ({
-  helloMessage: store.app.helloMessage,
-}))
-@observer
-export default class Landing extends Component {
-  static propTypes = {
-    helloMessage: PropTypes.string,
-  }
+const Landing = ({
+  store: { app: { helloMessage } },
+}) => (
+  <div>
+    <p>{helloMessage}!</p>
+  </div>
+);
 
-  render() {
-    const { helloMessage } = this.props;
+Landing.propTypes = {
+  store: PropTypes.object.isRequired,
+};
 
-    return (
-      <div>
-        <p>{helloMessage}!</p>
-      </div>
-    );
-  }
-}
+export default connect(Landing, {
+  theme: 'Default',
+});
