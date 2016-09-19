@@ -4,7 +4,7 @@ import coercer from 'coercer';
 import ZSchema from 'z-schema';
 import * as FormRules from './formize.rules';
 
-export function form(opts) {
+export function formize(fields = [], schema = {}) {
   const validator = new ZSchema({
     customValidator: (Report, Schema, Values) => {
       Object.keys(FormRules).forEach(rule => FormRules[rule](Report, Schema, Values));
@@ -15,10 +15,12 @@ export function form(opts) {
     @observer
     class Form extends Component {
       static propTypes = {
+        services: React.PropTypes.object,
         store: React.PropTypes.object,
       }
 
       static contextTypes = {
+        services: React.PropTypes.object,
         store: React.PropTypes.object,
       }
 
@@ -27,30 +29,36 @@ export function form(opts) {
       constructor(props, context) {
         super(props, context);
 
-        if (typeof opts === 'function') {
-          const parsedOpts = opts(props);
-          this.fields = parsedOpts.fields;
-          this.schema = parsedOpts.schema;
+        if (typeof fields === 'function') {
+          const parsedFields = fields(props);
+          this.fields = parsedFields;
+          this.schema = schema;
         } else {
-          this.fields = opts.fields;
-          this.schema = opts.schema;
+          this.fields = fields;
+          this.schema = schema;
         }
+
+        this.fields = this.fields.reduce((obj, item) => ({
+          ...obj,
+          [item.name]: item,
+        }), {});
 
         this.formName = ComposedComponent.formName ||
                         ComposedComponent.displayName ||
                         ComposedComponent.name;
+        this.services = props.services || context.services;
         this.store = props.store || context.store;
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleSetValue = this.handleSetValue.bind(this);
       }
 
       componentWillMount() {
-        this.store.formStore.addForm(this.formName, this.fields);
+        this.services.forms.addForm(this.formName, this.fields);
       }
 
       handleSubmit(event, cb) {
         // Get form fields
-        const formFields = this.store.formStore.forms[this.formName].fields;
+        const formFields = this.store.forms[this.formName].fields;
         // Bind values to field names
         const getKeyValue = (obj, key) => ({
           ...obj,
@@ -66,7 +74,7 @@ export function form(opts) {
         const errors = validator.getLastErrors();
         const formName = this.formName;
 
-        this.store.formStore.bindErrors(formName, errors);
+        this.services.forms.bindErrors(formName, errors);
 
         if (isValid) {
           cb(event, coercer(data));
@@ -75,25 +83,26 @@ export function form(opts) {
         event.preventDefault();
       }
 
-      handleSetValue(event) {
-        this.store.formStore.setValue(
-          this.formName,
-          event.target.name,
-          coercer(event.target.value),
-          event.target.type === 'checkbox' ? coercer(event.target.checked) : undefined,
-        );
+      handleSetValue(event, val) {
+        const isObject = typeof event === 'object';
+        const isCheckbox = event.target.type === 'checkbox';
+
+        const name = isObject ? event.target.name : event;
+        const value = isObject ? event.target.value : val;
+        const checked = isObject && isCheckbox ? coercer(event.target.checked) : undefined;
+
+        this.services.forms.setValue(this.formName, name, coercer(value), checked);
       }
 
       render() {
-        const { fields, errors } = this.store.formStore.forms[this.formName];
-
         return (
           <ComposedComponent
             {...this.props}
-            fields={fields}
-            errors={errors}
-            submit={this.handleSubmit}
-            setValue={this.handleSetValue}
+            form={{
+              ...this.store.forms[this.formName],
+              submit: this.handleSubmit,
+              setValue: this.handleSetValue,
+            }}
           />
         );
       }
