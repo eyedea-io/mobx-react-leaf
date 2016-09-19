@@ -1,5 +1,4 @@
 import React from 'react';
-
 // Provider inserts store and services into context of childrens
 import { Provider as Ground } from 'utils';
 // App routing
