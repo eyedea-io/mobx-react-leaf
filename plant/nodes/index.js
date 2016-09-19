@@ -5,7 +5,7 @@ import Landing from './Landing';
 import NotFound from './NotFound';
 
 export default () => (
-  <div>
+  <div className="App">
     <Match pattern="/" exactly component={Landing} />
     <Miss component={NotFound} />
   </div>
