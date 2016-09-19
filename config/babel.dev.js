@@ -11,7 +11,6 @@ module.exports = {
     require.resolve('babel-preset-react'),
   ],
   plugins: [
-    require.resolve('react-hot-loader/babel'),
     // @decorator class MyClass {}
     require.resolve('babel-plugin-transform-decorators-legacy'),
     // export Module from './Module'
@@ -20,5 +19,7 @@ module.exports = {
     require.resolve('babel-plugin-transform-class-properties'),
     // { ...todo, completed: true }
     require.resolve('babel-plugin-transform-object-rest-spread'),
+    // Hot reloading
+    require.resolve('react-hot-loader/babel'),
   ],
 };
