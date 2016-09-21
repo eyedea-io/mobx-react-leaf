@@ -1,3 +1,5 @@
+@import "settings.global";
+
 .btn {
   padding: 8px 15px;
   border: 0;
@@ -16,7 +18,27 @@
   }
 
   &--primary {
-    background: #303F9F;
+    background: $color-primary;
+    color: #fff;
+  }
+
+  &--secondary {
+    background: $color-secondary;
+    color: #fff;
+  }
+
+  &--tertiary {
+    background: $color-tertiary;
+    color: #fff;
+  }
+
+  &--positive {
+    background: $color-positive;
+    color: #fff;
+  }
+
+  &--negative {
+    background: $color-negative;
     color: #fff;
   }
 }

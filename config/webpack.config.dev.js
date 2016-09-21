@@ -140,6 +140,9 @@ module.exports = {
       },
     ],
   },
+  sassLoader: {
+    includePaths: paths.stylesSrc,
+  },
   // Point ESLint to our predefined config.
   eslint: {
     configFile: path.join(__dirname, 'eslint.js'),
