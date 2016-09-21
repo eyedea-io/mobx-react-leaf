@@ -40,10 +40,8 @@ function Request(url, options = {}) {
 
   opts.headers = new Headers(headers);
 
-  if (/api\.syncano/.test(url)) {
-    if (!opts.headers.has('Content-type')) {
-      opts.headers.append('Content-type', 'application/json');
-    }
+  if (!opts.headers.has('Content-type')) {
+    opts.headers.append('Content-type', 'application/json');
   }
 
   return fetch(url, opts)
