@@ -1,12 +1,21 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
+import { connect, MatchAsMember, MatchAsGuest } from 'utils';
 import { Match, Miss } from 'react-router';
 
 import Landing from './Landing';
 import NotFound from './NotFound';
 
-export default () => (
+const Routes = () => (
   <div className="App">
     <Match pattern="/" exactly component={Landing} />
+    <MatchAsGuest pattern="/public" exactly component={Landing} />
     <Miss component={NotFound} />
   </div>
 );
+
+Routes.propTypes = {
+  store: PropTypes.object.isRequired,
+  services: PropTypes.object.isRequired,
+};
+
+export default connect(Routes);

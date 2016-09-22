@@ -10,4 +10,10 @@ export default observable({
       }[this.language];
     },
   },
+  user: {
+    profile: {},
+    @computed get isLoggedIn() {
+      return !!Object.keys(this.profile).length;
+    },
+  },
 });
