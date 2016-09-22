@@ -4,7 +4,7 @@ import { Header, Wrapper } from 'twigs';
 const Default = ({ children }) => (
   <div>
     <Header />
-    <Wrapper className="pv">
+    <Wrapper className="u-pv">
       {children}
     </Wrapper>
   </div>

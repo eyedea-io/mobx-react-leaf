@@ -5,7 +5,7 @@ const Landing = ({
   store: { app: { helloMessage } },
 }) => (
   <div>
-    <p>{helloMessage}!</p>
+    <p className="u-alpha">{helloMessage}!</p>
   </div>
 );
 
