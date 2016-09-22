@@ -11,6 +11,7 @@ const babelQuery = require('./babel.prod');
 // PostCSS plugins
 const cssnext = require('postcss-cssnext');
 const postcssFocus = require('postcss-focus');
+const postcssImport = require('postcss-import');
 
 const modules = [
   'plant',
@@ -106,8 +107,9 @@ module.exports = {
       // use the "style" loader inside the async code so CSS from them won't be
       // in the main CSS file.
       {
-        test: /\.s?css$/,
-        include: [paths.appSrc],
+        test: /\.css$/,
+        include: paths.appSrc,
+        exclude: paths.stylesSrc,
         // "?-autoprefixer" disables autoprefixer in css-loader itself:
         // https://github.com/webpack/css-loader/issues/281
         // We already have it thanks to postcss. We only pass this flag in
@@ -118,9 +120,17 @@ module.exports = {
         // https://github.com/webpack/webpack/issues/283
         loader: ExtractTextPlugin.extract(
           'style-loader',
-          'css-loader?modules&-autoprefixer&importLoaders=1!postcss-loader!sass-loader'
+          'css-loader?modules&minimize&-autoprefixer&importLoaders=1!postcss-loader'
         ),
         // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
+      },
+      {
+        test: /\.css$/,
+        include: paths.stylesSrc,
+        loader: ExtractTextPlugin.extract(
+          'style-loader',
+          'css-loader?minimize!postcss-loader'
+        ),
       },
       {
         // Do not transform vendor's CSS with CSS-modules
@@ -170,7 +180,11 @@ module.exports = {
     useEslintrc: false,
   },
   // We use PostCSS for autoprefixing only.
-  postcss: () => [
+  postcss: (cssLoader) => [
+    postcssImport({
+      path: [paths.stylesSrc],
+      addDependencyTo: cssLoader,
+    }),
     postcssFocus(), // Add a :focus to every :hover
     cssnext({ // Allow future CSS features to be used, also auto-prefixes the CSS...
       browsers: ['last 2 versions', 'IE > 10'], // ...based on this browser list

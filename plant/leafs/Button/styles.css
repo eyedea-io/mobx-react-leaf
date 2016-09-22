@@ -1,6 +1,6 @@
-@import "settings.global";
+@import "_settings.css";
 
-.btn {
+.Btn {
   padding: 8px 15px;
   border: 0;
   border-radius: 3px;
@@ -18,27 +18,27 @@
   }
 
   &--primary {
-    background: $color-primary;
+    background: var(--color-primary, #fff);
     color: #fff;
   }
 
   &--secondary {
-    background: $color-secondary;
+    background: var(--color-secondary);
     color: #fff;
   }
 
   &--tertiary {
-    background: $color-tertiary;
+    background: var(--color-tertiary);
     color: #fff;
   }
 
   &--positive {
-    background: $color-positive;
+    background: var(--color-positive);
     color: #fff;
   }
 
   &--negative {
-    background: $color-negative;
+    background: var(--color-negative);
     color: #fff;
   }
 }

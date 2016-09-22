@@ -10,6 +10,7 @@ const babelQuery = require('./babel.dev');
 // PostCSS plugins
 const cssnext = require('postcss-cssnext');
 const postcssFocus = require('postcss-focus');
+const postcssImport = require('postcss-import');
 
 const modules = [
   'plant',
@@ -95,9 +96,15 @@ module.exports = {
       // In production, we use a plugin to extract that CSS to a file, but
       // in development "style" loader enables hot editing of CSS.
       {
-        test: /\.s?css$/,
+        test: /\.css$/,
         include: paths.appSrc,
-        loader: 'style-loader!css-loader?localIdentName=[local]__[path][name]__[hash:base64:5]&modules&importLoaders=1&sourceMap!postcss-loader!sass-loader',
+        exclude: paths.stylesSrc,
+        loader: 'style-loader!css-loader?localIdentName=[local]__[path][name]__[hash:base64:5]&modules&importLoaders=1&sourceMap!postcss-loader',
+      },
+      {
+        test: /\.css$/,
+        include: paths.stylesSrc,
+        loader: 'style-loader!css-loader?localIdentName=[local]__[path][name]__[hash:base64:5]&sourceMap!postcss-loader',
       },
       {
         // Do not transform vendor's CSS with CSS-modules
@@ -140,16 +147,17 @@ module.exports = {
       },
     ],
   },
-  sassLoader: {
-    includePaths: paths.stylesSrc,
-  },
   // Point ESLint to our predefined config.
   eslint: {
     configFile: path.join(__dirname, 'eslint.js'),
     useEslintrc: false,
   },
   // We use PostCSS for autoprefixing only.
-  postcss: () => [
+  postcss: (cssLoader) => [
+    postcssImport({
+      path: [paths.stylesSrc],
+      addDependencyTo: cssLoader,
+    }),
     postcssFocus(), // Add a :focus to every :hover
     cssnext({ // Allow future CSS features to be used, also auto-prefixes the CSS...
       browsers: ['last 2 versions', 'IE > 10'], // ...based on this browser list

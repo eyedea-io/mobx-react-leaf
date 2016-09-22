@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'utils';
 import { Button, Link } from 'leafs';
 import { Wrapper } from 'twigs';
-import styles from './styles.scss';
+import styles from './styles.css';
 
 const cn = require('classnames/bind').bind(styles);
 
@@ -22,7 +22,7 @@ const Header = ({
         </li>
         <li className={cn('Nav__item')}>
           <Button
-            className="btn--primary"
+            className="Btn--primary"
             onClick={() => setLanguage(language === 'en' ? 'pl' : 'en')}
           >Toggle language</Button>
         </li>

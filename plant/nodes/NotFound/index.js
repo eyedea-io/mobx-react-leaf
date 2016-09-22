@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'leafs';
-import styles from './styles.scss';
+import styles from './styles.css';
 
 const cn = require('classnames/bind').bind(styles);
 

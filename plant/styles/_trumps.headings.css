@@ -1,0 +1,22 @@
+/**
+ * = trumps.headings - manage your font sizes.
+ */
+
+// Extra large sizes
+.giga    { font-size: 60px; line-height: 60px; }
+.mega    { font-size: 45px; line-height: 52px; }
+.kilo    { font-size: 36px; line-height: 46px; }
+
+// Primary font sizes
+.alpha   { font-size: 32px; line-height: 42px; }
+.beta    { font-size: 28px; line-height: 36px; }
+.gamma   { font-size: 24px; line-height: 32px; }
+.delta   { font-size: 22px; line-height: 30px; }
+.epsilon { font-size: 18px; line-height: 24px; }
+.zeta    { font-size: 16px; line-height: 24px; }
+
+// Extra small sizes
+.milli   { font-size: 14px; line-height: 20px; }
+.micro   { font-size: 13px; line-height: 18px; }
+.nano    { font-size: 12px; line-height: 16px; }
+.pico    { font-size: 10px; line-height: 14px; }

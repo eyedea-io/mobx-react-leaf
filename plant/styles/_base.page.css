@@ -2,14 +2,10 @@
  * = base.page
  */
 
-$base-color: #666 !default;
-$base-line-height: 24px !default;
-$base-font-family: 'Open Sans', Helvetica, "Helvetica Neue", Arial, sans-serif !default;
-
 html {
-  color: $base-color;
-  font-family: $base-font-family;
-  line-height: $base-line-height;
+  color: var(--base-color);
+  line-height: var(--base-line-height);
+  font-family: var(--base-font-family);
   font-weight: 400;
   overflow-y: scroll;
   overflow-x: hidden;

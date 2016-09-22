@@ -1,5 +1,5 @@
 // Global styles
-import 'styles/styles.scss';
+import 'styles/styles.css';
 import React from 'react';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
