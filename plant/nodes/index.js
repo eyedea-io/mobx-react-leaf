@@ -8,6 +8,7 @@ import NotFound from './NotFound';
 const Routes = () => (
   <div className="App">
     <Match pattern="/" exactly component={Landing} />
+    <MatchAsMember pattern="/private" exactly component={Landing} redirectTo="/" />
     <MatchAsGuest pattern="/public" exactly component={Landing} />
     <Miss component={NotFound} />
   </div>
