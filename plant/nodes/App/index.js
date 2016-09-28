@@ -8,7 +8,7 @@ import Nodes from 'nodes';
 // Single source of data
 import store from 'store';
 // Functions that operate on data in store
-import services from 'services';
+import * as services from 'services';
 
 export default () => (
   <Ground store={store} services={services}>
