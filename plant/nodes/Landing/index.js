@@ -1,18 +1,17 @@
 import React, { PropTypes } from 'react';
+import { Layout } from 'twigs';
 import { connect } from 'utils';
 
 const Landing = ({
   store: { app: { helloMessage } },
 }) => (
-  <div>
+  <Layout name="Default">
     <p className="u-alpha">{helloMessage}!</p>
-  </div>
+  </Layout>
 );
 
 Landing.propTypes = {
   store: PropTypes.object.isRequired,
 };
 
-export default connect(Landing, {
-  theme: 'Default',
-});
+export default connect(Landing);
