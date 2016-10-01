@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Root from 'nodes/Root';
+import App from './App';
 
 it('renders', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<Root />, div);
+  ReactDOM.render(<App />, div);
 });
