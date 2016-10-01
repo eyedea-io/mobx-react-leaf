@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Layout } from 'twigs';
+import { Layout } from 'bytes';
 import { connect } from 'utils';
 
 const Landing = ({

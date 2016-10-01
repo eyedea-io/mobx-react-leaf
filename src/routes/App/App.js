@@ -1,19 +1,19 @@
 import React from 'react';
 // Provider inserts store and services into context of childrens
-import { Provider as Ground } from 'utils';
+import { Provider } from 'utils';
 // App routing
-import { BrowserRouter as Plant } from 'react-router';
+import { BrowserRouter as Router } from 'react-router';
 // App routes
-import Nodes from 'nodes';
+import Routes from 'routes';
 // Single source of data
 import store from 'store';
 // Functions that operate on data in store
 import * as services from 'services';
 
 export default () => (
-  <Ground store={store} services={services}>
-    <Plant>
-      <Nodes />
-    </Plant>
-  </Ground>
+  <Provider store={store} services={services}>
+    <Router>
+      <Routes />
+    </Router>
+  </Provider>
 );

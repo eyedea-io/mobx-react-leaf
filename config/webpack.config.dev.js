@@ -13,7 +13,7 @@ const postcssFocus = require('postcss-focus');
 const postcssImport = require('postcss-import');
 
 const modules = [
-  'plant',
+  'src',
   'node_modules',
 ];
 

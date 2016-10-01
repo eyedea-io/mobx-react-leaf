@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'utils';
-import { Button, Link } from 'leafs';
-import { Wrapper } from 'twigs';
+import { Button, Link } from 'bits';
+import { Wrapper } from 'bytes';
 import styles from './styles.css';
 
 const cn = require('classnames/bind').bind(styles);

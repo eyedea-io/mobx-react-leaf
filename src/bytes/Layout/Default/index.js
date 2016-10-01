@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Header, Wrapper } from 'twigs';
+import { Header, Wrapper } from 'bytes';
 
 const Default = ({ children }) => (
   <div>
