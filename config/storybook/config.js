@@ -1,7 +1,12 @@
-import { configure } from '@kadira/storybook';
+import { configure, addDecorator } from '@kadira/storybook';
+import AppDecorator from './decorator';
+
+addDecorator(AppDecorator);
+
+const stories = require.context('../../src/', true, /\.story\.js$/);
 
 function loadStories() {
-  return require('../../src/bits/stories'); // eslint-disable-line
+  stories.keys().forEach(stories);
 }
 
 configure(loadStories, module);

@@ -15,7 +15,23 @@ const cssnext = require('postcss-cssnext');
 const postcssFocus = require('postcss-focus');
 const postcssImport = require('postcss-import');
 
+const modules = [
+  'src',
+  'node_modules',
+];
+
 module.exports = {
+  resolve: {
+    modulesDirectories: modules,
+    modules,
+    // These are the reasonable defaults supported by the Node ecosystem.
+    extensions: [
+      '',
+      '.js',
+      '.jsx',
+      '.react.js',
+    ],
+  },
   module: {
     preLoaders: [
       {
