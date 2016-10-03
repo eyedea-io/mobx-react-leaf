@@ -1,0 +1,20 @@
+.Input {
+  font-size: 32px;
+  color: #666;
+  font-weight: 300;
+  text-align: center;
+  width: 100%;
+  border: 0;
+
+  &::placeholder {
+    color: #ccc;
+  }
+
+  &:focus {
+    outline: 0;
+  }
+
+  &:focus::placeholder {
+    color: #666;
+  }
+}
