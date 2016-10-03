@@ -27,7 +27,7 @@ export function formize({ formName, fields, schema = {}, permament = true }) {
       constructor(props, context) {
         super(props, context);
 
-        if (!formName) {
+        if (!formName && permament) {
           throw new Error('Property "formName" is required');
         }
 
