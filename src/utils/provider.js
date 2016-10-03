@@ -17,28 +17,26 @@ export class Provider extends Component {
 
     const { store, services } = this.props;
 
-    this.roots = {
-      store,
-      services: Object
-        .keys(services)
-        .reduce((initializedServices, serviceName) => ({
-          ...initializedServices,
-          [serviceName]: new services[serviceName],
-        }), {}),
-    };
+    this.store = store;
+    this.services = Object
+      .keys(services)
+      .reduce((initializedServices, serviceName) => ({
+        ...initializedServices,
+        [serviceName]: new services[serviceName],
+      }), {});
 
     Object
       .keys(services)
       .forEach(actionName => {
-        this.roots.services[actionName].store = this.roots.store;
-        this.roots.services[actionName].services = this.roots.services;
+        this.services[actionName].store = this.store;
+        this.services[actionName].services = this.services;
       });
   }
 
   getChildContext() {
     return {
-      services: this.roots.services,
-      store: this.roots.store,
+      services: this.services,
+      store: this.store,
     };
   }
 
