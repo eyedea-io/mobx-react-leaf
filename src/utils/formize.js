@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { observer, observable } from 'utils';
+import React, { Component, PropTypes } from 'react';
+import { observer, extendObservable } from 'utils';
 import coercer from 'coercer';
 import ZSchema from 'z-schema';
 import * as FormRules from './formize.rules';
 
-export function formize({ fields = [], schema = {} }) {
+export function formize({ formName, fields, schema = {}, permament = true }) {
   const validator = new ZSchema({
     customValidator: (Report, Schema, Values) => {
       Object.keys(FormRules).forEach(rule => FormRules[rule](Report, Schema, Values));
@@ -15,34 +15,62 @@ export function formize({ fields = [], schema = {} }) {
     @observer
     class Form extends Component {
       static propTypes = {
-        services: React.PropTypes.object,
-        store: React.PropTypes.object,
+        services: PropTypes.object,
+        store: PropTypes.object,
       }
 
       static contextTypes = {
-        services: React.PropTypes.object,
-        store: React.PropTypes.object,
+        services: PropTypes.object,
+        store: PropTypes.object,
       }
-
-      static formName;
 
       constructor(props, context) {
         super(props, context);
-        this.submit = this.submit.bind(this);
-        this.setValue = this.setValue.bind(this);
 
-        this.formName = ComposedComponent.formName;
-
-        if (!this.formName) {
-          throw new Error('Formized components must provide static property: formName');
+        if (!formName) {
+          throw new Error('Property "formName" is required');
         }
 
-        this.schema = schema;
-        this.fields = typeof fields === 'function' ? fields({ ...props, ...context }) : fields;
-        this.fields = this.fields.reduce((obj, item) => ({
-          ...obj,
-          [item.name]: item,
-        }), {});
+        if (!context.store.forms) {
+          extendObservable(context.store, { forms: {} });
+        }
+
+        const form = {
+          fields: {},
+          errors: {},
+          schema,
+        };
+
+        switch (typeof fields) {
+          case 'function':
+            form.fields = fields({ ...props, ...context }); break;
+          case 'object':
+            form.fields = fields; break;
+          default:
+            throw new Error('Property "fields" is required and must be function or object');
+        }
+
+        form.fields = Object
+          .keys(form.fields)
+          .reduce((obj, name) => ({
+            ...obj,
+            [name]: {
+              name,
+              value: '',
+              onChange: (e) => this.setValue(e),
+              ...form.fields[name],
+            },
+          }), {});
+
+        if (!context.store.forms[formName] || !permament) {
+          extendObservable(context.store.forms, {
+            [formName]: form,
+          });
+        }
+
+        this.form = context.store.forms[formName];
+        this.submit = this.submit.bind(this);
+        this.setValue = this.setValue.bind(this);
       }
 
       setValue(event, val) {
@@ -53,10 +81,10 @@ export function formize({ fields = [], schema = {} }) {
         const value = isObject ? event.target.value : val;
         const checked = isObject && isCheckbox ? coercer(event.target.checked) : undefined;
 
-        this.fields[name].value = coercer(value);
+        this.form.fields[name].value = coercer(value);
 
         if (checked !== undefined) {
-          this.fields[name].checked = checked;
+          this.form.fields[name].checked = checked;
         }
       }
 
@@ -64,47 +92,46 @@ export function formize({ fields = [], schema = {} }) {
         event.preventDefault(cb);
 
         // Get object with fieldName: fieldValue items.
-        const data = Object.keys(this.fields).reduce((obj, key) => ({
-          ...obj,
-          [key]:
-            this.fields[key].hasOwnProperty('checked') ? this.fields[key].checked :
-            this.fields[key].hasOwnProperty('value') ? this.fields[key].value :
-            this.fields[key].defaultValue,
-        }), {});
+        const data = Object
+          .keys(this.fields)
+          .reduce((obj, name) => ({
+            ...obj,
+            [name]:
+              this.form.fields[name].hasOwnProperty('checked') ? this.form.fields[name].checked :
+              this.form.fields[name].hasOwnProperty('value') ? this.form.fields[name].value :
+              this.form.fields[name].defaultValue,
+          }), {});
 
-        if (!this.schema.length) {
-          cb(event, coercer(data));
+        const coercedData = coercer(data);
+
+        if (!this.form.schema.length) {
+          cb(coercedData, event);
         } else {
-          const isValid = validator.validate(data, this.schema);
+          const isValid = validator.validate(data, this.form.schema);
           const errors = validator.getLastErrors();
 
-          this.errors = {};
+          this.form.errors = {};
 
           if (errors) {
-            errors.forEach(({ path, message }) => (this.errors[path.substr(2)] = message));
+            errors.forEach(({ path, message }) => (this.form.errors[path.substr(2)] = message));
           }
 
           if (isValid) {
-            cb(event, coercer(data));
+            cb(coercedData, event);
           }
         }
       }
 
-      @observable errors = {};
-      @observable fields = {};
-
       render() {
-        return (
-          <ComposedComponent
-            {...this.props}
-            form={{
-              fields: this.fields,
-              errors: this.errors,
-              submit: this.submit,
-              setValue: this.setValue,
-            }}
-          />
-        );
+        return React.createElement(observer(ComposedComponent), {
+          ...this.props,
+          formize: {
+            fields: this.form.fields,
+            errors: this.form.errors,
+            submit: this.submit,
+            setValue: this.setValue,
+          },
+        });
       }
     }
 

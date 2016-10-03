@@ -1,6 +1,7 @@
 import { observable, computed } from 'utils';
 
 export default observable({
+  forms: {},
   app: {
     language: 'en',
     @computed get helloMessage() {
