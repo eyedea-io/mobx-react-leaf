@@ -93,7 +93,7 @@ export function formize({ formName, fields, schema = {}, permament = true }) {
 
         // Get object with fieldName: fieldValue items.
         const data = Object
-          .keys(this.fields)
+          .keys(this.form.fields)
           .reduce((obj, name) => ({
             ...obj,
             [name]:
