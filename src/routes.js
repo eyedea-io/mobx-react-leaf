@@ -2,8 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect, MatchAsMember, MatchAsGuest } from 'utils';
 import { Match, Miss } from 'react-router';
 
-import Landing from './Landing';
-import NotFound from './NotFound';
+import { Landing, NotFound } from 'views';
 
 const Routes = () => (
   <div className="App">
