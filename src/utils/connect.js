@@ -7,6 +7,7 @@ export function connect(ComposedComponent, decorators = {}) {
     static propTypes = {
       services: PropTypes.object,
       store: PropTypes.object,
+      router: PropTypes.object,
     }
 
     static contextTypes = {
@@ -19,6 +20,7 @@ export function connect(ComposedComponent, decorators = {}) {
 
       this.services = props.services || context.services;
       this.store = props.store || context.store;
+      this.router = context.router;
     }
 
     render() {
@@ -26,6 +28,7 @@ export function connect(ComposedComponent, decorators = {}) {
         ...this.props,
         store: this.store,
         services: this.services,
+        router: this.router,
       });
     }
   }
