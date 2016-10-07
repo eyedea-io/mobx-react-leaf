@@ -32,7 +32,7 @@ export function formize({ formName, fields, schema = {}, permament = true }) {
         }
 
         if (!context.store.forms) {
-          extendObservable(context.store, { forms: asMap(new Map()) });
+          extendObservable(context.store, { forms: asMap() });
         }
 
         const form = {
@@ -62,7 +62,7 @@ export function formize({ formName, fields, schema = {}, permament = true }) {
             },
           }), {});
 
-        if (!context.store.forms[formName] || !permament) {
+        if (!context.store.forms.get(formName) || !permament) {
           context.store.forms.set(formName, form);
         }
 
