@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { observer, extendObservable } from 'utils';
+import { observer, extendObservable, asMap } from 'utils';
 import coercer from 'coercer';
 import ZSchema from 'z-schema';
 import * as FormRules from './formize.rules';
@@ -32,7 +32,7 @@ export function formize({ formName, fields, schema = {}, permament = true }) {
         }
 
         if (!context.store.forms) {
-          extendObservable(context.store, { forms: {} });
+          extendObservable(context.store, { forms: asMap(new Map()) });
         }
 
         const form = {
@@ -63,12 +63,10 @@ export function formize({ formName, fields, schema = {}, permament = true }) {
           }), {});
 
         if (!context.store.forms[formName] || !permament) {
-          extendObservable(context.store.forms, {
-            [formName]: form,
-          });
+          context.store.forms.set(formName, form);
         }
 
-        this.form = context.store.forms[formName];
+        this.form = context.store.forms.get(formName);
         this.submit = this.submit.bind(this);
         this.setValue = this.setValue.bind(this);
       }

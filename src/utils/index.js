@@ -4,4 +4,4 @@ export { formize } from './formize';
 export request from './request';
 export { observer } from 'mobx-react';
 export { MatchAsMember, MatchAsGuest } from './routing';
-export { observable, extendObservable, action, computed, toJS } from 'mobx';
+export { observable, extendObservable, action, computed, toJS, asMap } from 'mobx';
