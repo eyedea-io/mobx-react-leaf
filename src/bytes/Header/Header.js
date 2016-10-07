@@ -22,7 +22,7 @@ const Header = ({
         </li>
         <li className={cn('Nav__item')}>
           <Button
-            className="Btn--primary"
+            modifiers="primary"
             onClick={() => setLanguage(language === 'en' ? 'pl' : 'en')}
           >Toggle language</Button>
         </li>
