@@ -5,6 +5,8 @@ import user from './user';
 export default observable({
   // List of pending actions/request
   pending: asMap(new Set()),
+  // List of form errors
+  errors: asMap(),
   forms: asMap(),
   app,
   user,
