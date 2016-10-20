@@ -11,6 +11,7 @@ const babelQuery = require('./babel.dev');
 const cssnext = require('postcss-cssnext');
 const postcssFocus = require('postcss-focus');
 const postcssImport = require('postcss-import');
+const postcssNested = require('postcss-nested');
 
 const modules = [
   'src',
@@ -154,6 +155,7 @@ module.exports = {
   },
   // We use PostCSS for autoprefixing only.
   postcss: (cssLoader) => [
+    postcssNested(),
     postcssImport({
       path: [paths.stylesSrc],
       addDependencyTo: cssLoader,
