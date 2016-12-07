@@ -61,17 +61,17 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        include: paths.appNodeModules,
+        include: /node_modules/,
         loaders: ['style-loader', 'css-loader'],
       },
       {
         test: /\.json$/,
-        include: [paths.appSrc, paths.appNodeModules],
+        include: [paths.appSrc, /node_modules/],
         loader: 'json',
       },
       {
         test: /\.(jpg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)(\?.*)?$/,
-        include: [paths.appSrc, paths.appNodeModules],
+        include: [paths.appSrc, /node_modules/],
         loader: 'file',
         query: {
           name: 'static/media/[name].[hash:8].[ext]',
@@ -79,7 +79,7 @@ module.exports = {
       },
       {
         test: /\.(mp4|webm)(\?.*)?$/,
-        include: [paths.appSrc, paths.appNodeModules],
+        include: [paths.appSrc, /node_modules/],
         loader: 'url',
         query: {
           limit: 10000,

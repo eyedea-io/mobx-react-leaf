@@ -7,6 +7,4 @@ module.exports = {
   appPackageJson: path.resolve('package.json'),
   appSrc: path.resolve('src'),
   stylesSrc: path.resolve('src/styles'),
-  appNodeModules: path.resolve('node_modules'),
-  ownNodeModules: path.resolve('node_modules'),
 };
