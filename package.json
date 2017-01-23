@@ -72,7 +72,7 @@
   "scripts": {
     "start": "node ./scripts/start.js",
     "build": "node ./scripts/build.js",
-    "test": "xo && jest --watch --env=jsdom",
+    "test": "xo && jest --env=jsdom",
     "storybook": "start-storybook -p 6006 --config-dir=./config/storybook",
     "build-storybook": "build-storybook"
   },
