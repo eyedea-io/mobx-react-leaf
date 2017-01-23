@@ -39,13 +39,12 @@ module.exports = {
   },
   resolve: {
     modules: [
-      'src',
-      'node_modules'
+      paths.appSrc,
+      path.join(__dirname, '../node_modules')
     ],
     extensions: [
       '.js',
-      '.jsx',
-      '.react.js'
+      '.jsx'
     ]
   },
   module: {
@@ -132,11 +131,11 @@ module.exports = {
     }),
     new webpack.LoaderOptionsPlugin({
       options: {
-        postcss: cssLoader => [
+        postcss: () => [
           postcssNested(),
           postcssImport({
             path: [paths.stylesSrc],
-            addDependencyTo: cssLoader
+            addDependencyTo: webpack
           }),
           postcssFocus(),
           cssnext({
