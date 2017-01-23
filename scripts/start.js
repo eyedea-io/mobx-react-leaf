@@ -1,14 +1,12 @@
-/* eslint consistent-return:0 */
-/* eslint-disable no-console */
+const resolve = require('path').resolve;
 const express = require('express');
-
 const argv = require('minimist')(process.argv.slice(2));
 const setup = require('./utils/serverMiddleware');
-const resolve = require('path').resolve;
+
 const app = express();
 
-// get the intended port number, use port 3000 if not provided
-const port = argv.port || process.env.PORT || 3000;
+// get the intended port number, use port 8080 if not provided
+const port = argv.port || process.env.PORT || 8080;
 
 // In production we need to pass these values in instead of relying on webpack
 setup(app, {

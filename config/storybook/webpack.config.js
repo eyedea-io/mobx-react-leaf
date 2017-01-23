@@ -1,10 +1,10 @@
-const paths = require('../paths');
-const babelQuery = require('../babel.dev');
-
 // PostCSS plugins
 const cssnext = require('postcss-cssnext');
 const postcssFocus = require('postcss-focus');
 const postcssImport = require('postcss-import');
+
+const paths = require('../paths');
+const babelQuery = require('../babel.dev');
 
 const modules = [
   'src',

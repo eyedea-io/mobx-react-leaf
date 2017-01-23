@@ -2,8 +2,8 @@
 const chalk = require('chalk');
 const argv = require('minimist')(process.argv.slice(2));
 
-// get the intended port number, use port 3000 if not provided
-const port = argv.port || process.env.PORT || 3000;
+// get the intended port number, use port 8080 if not provided
+const port = argv.port || process.env.PORT || 8080;
 
 const friendlySyntaxErrorLabel = 'Syntax error:';
 
@@ -25,7 +25,7 @@ function formatMessage(message) {
       'Module not found:'
     )
     // Internal stacks are generally useless so we strip them
-    .replace(/^\s*at\s.*:\d+:\d+[\s\)]*\n/gm, '') // at ... ...:x:y
+    .replace(/^\s*at\s.*:\d+:\d+[\s)]*\n/gm, '') // at ... ...:x:y
     // Webpack loader names obscure CSS filenames
     .replace('./~/css-loader!./~/postcss-loader!', '');
 }

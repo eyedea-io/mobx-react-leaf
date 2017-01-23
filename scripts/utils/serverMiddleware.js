@@ -1,6 +1,6 @@
 /* eslint-disable no-console, no-var, vars-on-top, global-require */
-const express = require('express');
 const path = require('path');
+const express = require('express');
 // const compression = require('compression');
 
 // Dev middleware

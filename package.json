@@ -38,6 +38,7 @@
     "ip": "^1.1.3",
     "jest": "^18.0.0",
     "json-loader": "0.5.4",
+    "minimist": "^1.2.0",
     "object-assign": "4.1.0",
     "postcss-cssnext": "^2.7.0",
     "postcss-focus": "^1.0.0",
@@ -54,9 +55,9 @@
     "webpack": "beta",
     "webpack-dev-middleware": "^1.7.0",
     "webpack-hot-middleware": "^2.12.2",
+    "whatwg-fetch": "2.0.1",
     "xo": "^0.17.1",
     "xo-loader": "^0.7.0",
-    "whatwg-fetch": "2.0.1",
     "z-schema": "^3.17.0"
   },
   "dependencies": {
@@ -105,13 +106,13 @@
     "space": true,
     "module": false,
     "semicolon": true,
+    "ignores": [
+      "config",
+      "scripts/build.js",
+      "node_modules",
+      "\\.(json|css|jpg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm)$"
+    ],
     "settings": {
-      "import/ignore": [
-        "config",
-        "scripts",
-        "node_modules",
-        "\\.(json|css|jpg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm)$"
-      ],
       "import/resolver": {
         "webpack": {
           "config": "config/webpack.config.dev.js"
@@ -119,7 +120,8 @@
       }
     },
     "envs": [
-      "browser"
+      "browser",
+      "mocha"
     ],
     "rules": {
       "object-curly-spacing": 0,
@@ -128,7 +130,8 @@
       "react/jsx-no-bind": 0,
       "import/named": 0,
       "import/prefer-default-export": 0,
-      "import/no-unresolved": 0
+      "import/no-unresolved": 0,
+      "import/no-unassigned-import": 0
     }
   }
 }

@@ -129,11 +129,11 @@ module.exports = {
       minimize: true,
       options: {
         context: __dirname,
-        postcss: cssLoader => [
+        postcss: () => [
           postcssNested(),
           postcssImport({
             path: [paths.stylesSrc],
-            addDependencyTo: cssLoader
+            addDependencyTo: webpack
           }),
           postcssFocus(),
           cssnext({

@@ -1,4 +1,3 @@
-/* eslint-disable */
 // This Webpack plugin ensures `npm install <library>` forces a project rebuild.
 // We’re not sure why this isn't Webpack's default behavior.
 // See https://github.com/facebookincubator/create-react-app/issues/186.
@@ -9,8 +8,8 @@ function WatchMissingNodeModulesPlugin(nodeModulesPath) {
 
 WatchMissingNodeModulesPlugin.prototype.apply = function (compiler) {
   compiler.plugin('emit', (compilation, callback) => {
-    var missingDeps = compilation.missingDependencies;
-    var nodeModulesPath = this.nodeModulesPath;
+    const missingDeps = compilation.missingDependencies;
+    const nodeModulesPath = this.nodeModulesPath;
 
     // If any missing files are expected to appear in node_modules...
     if (missingDeps.some(file => file.indexOf(nodeModulesPath) !== -1)) {
@@ -20,6 +19,6 @@ WatchMissingNodeModulesPlugin.prototype.apply = function (compiler) {
 
     callback();
   });
-}
+};
 
 module.exports = WatchMissingNodeModulesPlugin;

@@ -1,18 +1,18 @@
-/* eslint-disable */
+/* eslint-disable no-var */
 // Do this as the first thing so that any code reading it knows the right env.
 process.env.NODE_ENV = 'production';
 
-var chalk = require('chalk');
 var fs = require('fs');
 var path = require('path');
+var chalk = require('chalk');
 var filesize = require('filesize');
 var gzipSize = require('gzip-size').sync;
 var rimrafSync = require('rimraf').sync;
 var webpack = require('webpack');
 var config = require('../config/webpack.config.prod');
 var paths = require('../config/paths');
-var recursive = require('recursive-readdir');
 var stripAnsi = require('strip-ansi');
+var recursive = require('recursive-readdir');
 
 // Input: /User/dan/app/build/static/js/main.82be8.js
 // Output: /static/js/main.js
@@ -27,7 +27,7 @@ function removeFileNameHash(fileName) {
 function getDifferenceLabel(currentSize, previousSize) {
   var FIFTY_KILOBYTES = 1024 * 50;
   var difference = currentSize - previousSize;
-  var fileSize = !Number.isNaN(difference) ? filesize(difference) : 0;
+  var fileSize = Number.isNaN(difference) ? 0 : filesize(difference);
   if (difference >= FIFTY_KILOBYTES) {
     return chalk.red('+' + fileSize);
   } else if (difference < FIFTY_KILOBYTES && difference > 0) {
