@@ -2,7 +2,7 @@
 const req = require.context('./', true, /^\.\/.*\/index.js/);
 
 // Export each byte
-req.keys().forEach((modulePath) => {
+req.keys().forEach(modulePath => {
   // Export name is based on byte directory
   const moduleName = modulePath.match(/\.\/(.*)\//)[1];
 

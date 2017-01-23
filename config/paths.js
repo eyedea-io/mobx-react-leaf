@@ -6,5 +6,5 @@ module.exports = {
   appFavicon: path.resolve('favicon.ico'),
   appPackageJson: path.resolve('package.json'),
   appSrc: path.resolve('src'),
-  stylesSrc: path.resolve('src/styles'),
+  stylesSrc: path.resolve('src/styles')
 };

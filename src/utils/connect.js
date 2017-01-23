@@ -1,18 +1,18 @@
 import React, { Component, PropTypes } from 'react';
-import * as utils from 'utils';
 import hoistStatics from 'hoist-non-react-statics';
+import * as utils from 'utils';
 
 export function connect(ComposedComponent, decorators = {}) {
   class Connect extends Component {
     static propTypes = {
       services: PropTypes.object,
       store: PropTypes.object,
-      router: PropTypes.object,
+      router: PropTypes.object // eslint-disable-line react/no-unused-prop-types
     }
 
     static contextTypes = {
       services: PropTypes.object,
-      store: PropTypes.object,
+      store: PropTypes.object
     }
 
     constructor(props, context) {
@@ -28,7 +28,7 @@ export function connect(ComposedComponent, decorators = {}) {
         ...this.props,
         store: this.store,
         services: this.services,
-        router: this.router,
+        router: this.router
       });
     }
   }

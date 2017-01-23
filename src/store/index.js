@@ -1,13 +1,13 @@
-import { observable, asMap } from 'utils';
 import app from './app';
 import user from './user';
+import { observable } from 'utils';
 
 export default observable({
   // List of pending actions/request
-  pending: asMap(new Set()),
+  pending: observable.map(),
   // List of form errors
-  errors: asMap(),
-  forms: asMap(),
+  errors: observable.map(),
+  forms: observable.map(),
   app,
-  user,
+  user
 });

@@ -36,7 +36,7 @@ function clearConsole() {
   process.stdout.write('\x1bc');
 }
 
-module.exports = (compiler) => {
+module.exports = compiler => {
   compiler.plugin('invalid', () => {
     clearConsole();
     console.log('Compiling...');
@@ -44,7 +44,7 @@ module.exports = (compiler) => {
 
   // "done" event fires when Webpack has finished recompiling the bundle.
   // Whether or not you have warnings or errors, you will get this event.
-  compiler.plugin('done', (stats) => {
+  compiler.plugin('done', stats => {
     clearConsole();
     const hasErrors = stats.hasErrors();
     const hasWarnings = stats.hasWarnings();

@@ -1,8 +1,8 @@
-export function isRequired(report, schema, json) {
+export function isRequired(report, schema, json) { // eslint-disable-line import/prefer-default-export
   const originalPath = report.path;
 
   if (Array.isArray(schema.required)) {
-    schema.required.forEach((prop) => {
+    schema.required.forEach(prop => {
       const hasValue = json[prop];
 
       if (!hasValue) {

@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from 'bits';
 import styles from './styles.css';
+import { Link } from 'bits';
 
 const cn = require('classnames/bind').bind(styles);
 

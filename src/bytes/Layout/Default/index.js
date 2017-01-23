@@ -11,7 +11,7 @@ import Wrapper from 'bytes/Wrapper';
 
 const Default = ({ children }) => (
   <div>
-    <Header />
+    <Header/>
     <Wrapper className="u-pv">
       {children}
     </Wrapper>
@@ -19,7 +19,7 @@ const Default = ({ children }) => (
 );
 
 Default.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired
 };
 
 export default Default;

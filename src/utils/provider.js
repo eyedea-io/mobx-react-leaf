@@ -4,12 +4,12 @@ export class Provider extends Component {
   static propTypes = {
     store: PropTypes.object.isRequired,
     services: PropTypes.object.isRequired,
-    children: PropTypes.element.isRequired,
+    children: PropTypes.element.isRequired
   }
 
   static childContextTypes = {
     services: PropTypes.object.isRequired,
-    store: PropTypes.object.isRequired,
+    store: PropTypes.object.isRequired
   }
 
   constructor(props, context) {
@@ -22,7 +22,7 @@ export class Provider extends Component {
       .keys(services)
       .reduce((initializedServices, serviceName) => ({
         ...initializedServices,
-        [serviceName]: new services[serviceName],
+        [serviceName]: new services[serviceName]// eslint-disable-line new-parens
       }), {});
 
     Object
@@ -36,7 +36,7 @@ export class Provider extends Component {
   getChildContext() {
     return {
       services: this.services,
-      store: this.store,
+      store: this.store
     };
   }
 

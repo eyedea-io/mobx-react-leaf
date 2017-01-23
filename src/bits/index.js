@@ -2,7 +2,7 @@
 const req = require.context('./', true, /^\.\/.*\/index.js/);
 
 // Export each bit
-req.keys().forEach((modulePath) => {
+req.keys().forEach(modulePath => {
   // Export name is based on bit directory
   const moduleName = modulePath.match(/\.\/(.*)\//)[1];
 
@@ -11,4 +11,4 @@ req.keys().forEach((modulePath) => {
 });
 
 // Export vendor bits
-export { Link } from 'react-router';
+export { Link } from 'react-router'; // eslint-disable-line import/prefer-default-export

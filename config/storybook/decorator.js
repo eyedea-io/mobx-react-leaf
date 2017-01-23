@@ -7,7 +7,7 @@ import store from 'store';
 // Functions that operate on data in store
 import * as services from 'services';
 
-export default (story) => (
+export default story => (
   <Provider store={store} services={services}>
     <Router>
       {story()}

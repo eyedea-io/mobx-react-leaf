@@ -1,23 +1,22 @@
 /* eslint-disable no-var, vars-on-top */
 const path = require('path');
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const url = require('url');
-const paths = require('./paths');
-const env = require('./env');
-const babelQuery = require('./babel.prod');
-
+const webpack = require('webpack');
 const cssnext = require('postcss-cssnext');
 const postcssFocus = require('postcss-focus');
 const postcssImport = require('postcss-import');
 const postcssNested = require('postcss-nested');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const paths = require('./paths');
+const env = require('./env');
+const babelQuery = require('./babel.prod');
 
 if (env['process.env.NODE_ENV'] !== '"production"') {
   throw new Error('Production builds must have NODE_ENV=production.');
 }
 
-const homepagePath = require(paths.appPackageJson).homepage;
+const homepagePath = require(paths.appPackageJson).homepage; // eslint-disable-line import/no-dynamic-require
 
 var publicPath = homepagePath ? url.parse(homepagePath).pathname : '/';
 
@@ -30,38 +29,38 @@ module.exports = {
   devtool: 'source-map',
   entry: [
     require.resolve('./polyfills'),
-    path.join(paths.appSrc, 'index'),
+    path.join(paths.appSrc, 'index')
   ],
   output: {
     path: paths.appBuild,
     filename: 'static/js/[name].[chunkhash:8].js',
     chunkFilename: 'static/js/[name].[chunkhash:8].chunk.js',
-    publicPath,
+    publicPath
   },
   resolve: {
     modules: [
       'src',
-      'node_modules',
+      'node_modules'
     ],
     extensions: [
       '.js',
       '.jsx',
-      '.react.js',
-    ],
+      '.react.js'
+    ]
   },
   module: {
     rules: [
       {
         enforce: 'pre',
         test: /\.js$/,
-        loader: 'eslint-loader',
-        include: paths.appSrc,
+        loader: 'xo-loader',
+        include: paths.appSrc
       },
       {
         test: /\.js$/,
         include: paths.appSrc,
         loader: 'babel-loader',
-        options: babelQuery,
+        options: babelQuery
       },
       {
         test: /\.css$/,
@@ -70,37 +69,37 @@ module.exports = {
         loader: ExtractTextPlugin.extract({
           fallbackLoader: 'style-loader',
           loader: 'css-loader?modules&minimize&-autoprefixer&importLoaders=1!postcss-loader',
-          publicPath: '/dist',
-        }),
+          publicPath: '/dist'
+        })
       },
       {
         test: /\.css$/,
         include: paths.stylesSrc,
         loader: ExtractTextPlugin.extract({
           fallbackLoader: 'style-loader',
-          loader: 'css-loader?minimize!postcss-loader',
-        }),
+          loader: 'css-loader?minimize!postcss-loader'
+        })
       },
       {
         test: /\.css$/,
         include: /node_modules/,
         use: [
           { loader: 'style-loader' },
-          { loader: 'css-loader' },
-        ],
+          { loader: 'css-loader' }
+        ]
       },
       {
         test: /\.json$/,
         include: [paths.appSrc, /node_modules/],
-        loader: 'json-loader',
+        loader: 'json-loader'
       },
       {
         test: /\.(jpg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)(\?.*)?$/,
         include: [paths.appSrc, /node_modules/],
         loader: 'file-loader',
         options: {
-          name: 'static/media/[name].[hash:8].[ext]',
-        },
+          name: 'static/media/[name].[hash:8].[ext]'
+        }
       },
       {
         test: /\.(mp4|webm)(\?.*)?$/,
@@ -108,10 +107,10 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: 'static/media/[name].[hash:8].[ext]',
-        },
-      },
-    ],
+          name: 'static/media/[name].[hash:8].[ext]'
+        }
+      }
+    ]
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -128,48 +127,44 @@ module.exports = {
         keepClosingSlash: true,
         minifyJS: true,
         minifyCSS: true,
-        minifyURLs: true,
-      },
+        minifyURLs: true
+      }
     }),
     new webpack.LoaderOptionsPlugin({
       options: {
-        eslint: {
-          configFile: path.join(__dirname, 'eslint.js'),
-          useEslintrc: false,
-        },
-        postcss: (cssLoader) => [
+        postcss: cssLoader => [
           postcssNested(),
           postcssImport({
             path: [paths.stylesSrc],
-            addDependencyTo: cssLoader,
+            addDependencyTo: cssLoader
           }),
           postcssFocus(),
           cssnext({
-            browsers: ['last 2 versions', 'IE > 10'],
-          }),
-        ],
-      },
+            browsers: ['last 2 versions', 'IE > 10']
+          })
+        ]
+      }
     }),
     new webpack.DefinePlugin(env),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
-        screw_ie8: true, // React doesn't support IE8
-        warnings: false,
+        screw_ie8: true, // eslint-disable-line camelcase
+        warnings: false
       },
       mangle: {
-        screw_ie8: true,
+        screw_ie8: true // eslint-disable-line camelcase
       },
       output: {
         comments: false,
-        screw_ie8: true,
-      },
+        screw_ie8: true // eslint-disable-line camelcase
+      }
     }),
     new ExtractTextPlugin({
       filename: 'static/css/[name].[contenthash:8].css',
       disable: false,
-      allChunks: true,
-    }),
-  ],
+      allChunks: true
+    })
+  ]
 };

@@ -13,11 +13,11 @@ const port = argv.port || process.env.PORT || 3000;
 // In production we need to pass these values in instead of relying on webpack
 setup(app, {
   outputPath: resolve(process.cwd(), 'build'),
-  publicPath: '/',
+  publicPath: '/'
 });
 
 // Start your app.
-app.listen(port, (err) => {
+app.listen(port, err => {
   if (err) {
     return console.log(err);
   }

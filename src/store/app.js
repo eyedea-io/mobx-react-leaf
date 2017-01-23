@@ -1,11 +1,11 @@
-import { computed } from 'utils';
+import { computed, observable } from 'utils';
 
 export default {
-  language: 'en',
+  @observable language: 'en',
   @computed get helloMessage() {
     return {
       en: 'Hello',
-      pl: 'Cześć',
+      pl: 'Cześć'
     }[this.language];
-  },
+  }
 };

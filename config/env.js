@@ -8,7 +8,7 @@ module.exports = Object
   .keys(process.env)
   .filter(key => REACT_APP.test(key))
   .reduce((env, key) => Object.assign({}, env, {
-    [`process.env.${key}`]: JSON.stringify(process.env[key]),
+    [`process.env.${key}`]: JSON.stringify(process.env[key])
   }), {
-    'process.env.NODE_ENV': NODE_ENV,
+    'process.env.NODE_ENV': NODE_ENV
   });

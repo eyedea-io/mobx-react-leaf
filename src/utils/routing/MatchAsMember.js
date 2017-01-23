@@ -1,23 +1,27 @@
 import React, { PropTypes } from 'react';
-import { connect } from 'utils';
 import { Redirect, Match } from 'react-router';
+import { connect } from 'utils';
 
 const MatchAsMember = ({
   redirectTo = '/auth/login',
   component: Component,
   store: { user: { isLoggedIn } },
-  ...rest,
+  ...rest
 }) => (
-  <Match {...rest} render={props => (
+  <Match
+    {...rest} render={props => (
     isLoggedIn ? (
-      <Component {...props} />
+      <Component {...props}/>
     ) : (
-      <Redirect to={{
-        pathname: redirectTo,
-        state: { from: props.location },
-      }} />
+      <Redirect
+        to={{
+          pathname: redirectTo,
+          state: { from: props.location }
+        }}
+        />
     )
-  )} />
+  )}
+              />
 );
 
 MatchAsMember.propTypes = {
@@ -25,6 +29,7 @@ MatchAsMember.propTypes = {
   component: PropTypes.func.isRequired,
   store: PropTypes.object.isRequired,
   location: PropTypes.object,
+  redirectTo: PropTypes.string
 };
 
 export default connect(MatchAsMember);

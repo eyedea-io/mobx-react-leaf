@@ -7,7 +7,7 @@ const Button = ({
   children,
   modifiers = '',
   className = '',
-  ...rest,
+  ...rest
 }) => (
   <button
     {...rest}
@@ -15,7 +15,7 @@ const Button = ({
       className.split(' '),
       modifiers.split(' ').map(str => `Btn--${str}`)
     )}
-  >
+    >
     {children}
   </button>
 );
@@ -23,7 +23,7 @@ const Button = ({
 Button.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
-  modifiers: PropTypes.string,
+  modifiers: PropTypes.string
 };
 
 export default Button;

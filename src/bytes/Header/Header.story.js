@@ -4,5 +4,5 @@ import Header from './Header';
 
 storiesOf('Header', module)
   .add('Default', () => (
-    <Header />
+    <Header/>
   ));

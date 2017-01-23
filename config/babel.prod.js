@@ -5,7 +5,7 @@ module.exports = {
     // Latest stable ECMAScript features
     [require.resolve('babel-preset-latest'), { modules: false }],
     // JSX, Flow
-    require.resolve('babel-preset-react'),
+    require.resolve('babel-preset-react')
   ],
   plugins: [
     require.resolve('babel-plugin-transform-react-remove-prop-types'),
@@ -18,6 +18,6 @@ module.exports = {
     // { ...todo, completed: true }
     require.resolve('babel-plugin-transform-object-rest-spread'),
     // Optimization: hoist JSX that never changes out of render()
-    require.resolve('babel-plugin-transform-react-constant-elements'),
-  ],
+    require.resolve('babel-plugin-transform-react-constant-elements')
+  ]
 };

@@ -19,7 +19,7 @@ function checkStatus(response) {
     return response;
   }
 
-  return response.json().then((repsonseJSON) => {
+  return response.json().then(repsonseJSON => {
     const error = new Error(response.statusText);
     error.response = repsonseJSON;
     throw error;
@@ -52,31 +52,31 @@ function Request(url, options = {}) {
 
 Request.get = (url, options) => new Request(url, {
   method: 'GET',
-  ...options,
+  ...options
 });
 
 Request.post = (url, data, options) => new Request(url, {
   body: JSON.stringify(data),
   method: 'POST',
-  ...options,
+  ...options
 });
 
 Request.patch = (url, data, options) => new Request(url, {
   body: JSON.stringify(data),
   method: 'PATCH',
-  ...options,
+  ...options
 });
 
 Request.put = (url, data, options) => new Request(url, {
   body: JSON.stringify(data),
   method: 'PUT',
-  ...options,
+  ...options
 });
 
 Request.delete = (url, data, options) => new Request(url, {
   body: JSON.stringify(data),
   method: 'DELETE',
-  ...options,
+  ...options
 });
 
 export default Request;

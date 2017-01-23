@@ -1,12 +1,3 @@
-// you can use this file to add your custom webpack plugins, loaders and anything you like.
-// This is just the basic way to add addional webpack configurations.
-// For more information refer the docs: https://goo.gl/qPbSyX
-
-// IMPORTANT
-// When you add this file, we won't add the default configurations which is similar
-// to "React Create App". This only has babel loader to load JavaScript.
-
-const path = require('path');
 const paths = require('../paths');
 const babelQuery = require('../babel.dev');
 
@@ -17,7 +8,7 @@ const postcssImport = require('postcss-import');
 
 const modules = [
   'src',
-  'node_modules',
+  'node_modules'
 ];
 
 module.exports = {
@@ -29,53 +20,52 @@ module.exports = {
       '',
       '.js',
       '.jsx',
-      '.react.js',
-    ],
+      '.react.js'
+    ]
   },
   module: {
-    preLoaders: [
-      {
-        test: /\.js$/,
-        loader: 'eslint-loader',
-        include: paths.appSrc,
-      },
-    ],
     loaders: [
+      {
+        enforce: 'pre',
+        test: /\.js$/,
+        loader: 'xo-loader',
+        include: paths.appSrc
+      },
       {
         test: /\.js$/,
         include: paths.appSrc,
         loader: 'babel',
         exclude: /node_modules/,
-        query: babelQuery,
+        query: babelQuery
       },
       {
         test: /\.css$/,
         include: paths.appSrc,
         exclude: paths.stylesSrc,
-        loader: 'style-loader!css-loader?localIdentName=[local]__[path][name]__[hash:base64:5]&modules&importLoaders=1&sourceMap!postcss-loader',
+        loader: 'style-loader!css-loader?localIdentName=[local]__[path][name]__[hash:base64:5]&modules&importLoaders=1&sourceMap!postcss-loader'
       },
       {
         test: /\.css$/,
         include: paths.stylesSrc,
-        loader: 'style-loader!css-loader?localIdentName=[local]__[path][name]__[hash:base64:5]&sourceMap!postcss-loader',
+        loader: 'style-loader!css-loader?localIdentName=[local]__[path][name]__[hash:base64:5]&sourceMap!postcss-loader'
       },
       {
         test: /\.css$/,
         include: /node_modules/,
-        loaders: ['style-loader', 'css-loader'],
+        loaders: ['style-loader', 'css-loader']
       },
       {
         test: /\.json$/,
         include: [paths.appSrc, /node_modules/],
-        loader: 'json',
+        loader: 'json'
       },
       {
         test: /\.(jpg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)(\?.*)?$/,
         include: [paths.appSrc, /node_modules/],
         loader: 'file',
         query: {
-          name: 'static/media/[name].[hash:8].[ext]',
-        },
+          name: 'static/media/[name].[hash:8].[ext]'
+        }
       },
       {
         test: /\.(mp4|webm)(\?.*)?$/,
@@ -83,23 +73,19 @@ module.exports = {
         loader: 'url',
         query: {
           limit: 10000,
-          name: 'static/media/[name].[hash:8].[ext]',
-        },
-      },
-    ],
+          name: 'static/media/[name].[hash:8].[ext]'
+        }
+      }
+    ]
   },
-  eslint: {
-    configFile: path.join(__dirname, '../eslint.js'),
-    useEslintrc: false,
-  },
-  postcss: (cssLoader) => [
+  postcss: cssLoader => [
     postcssImport({
       path: [paths.stylesSrc],
-      addDependencyTo: cssLoader,
+      addDependencyTo: cssLoader
     }),
     postcssFocus(),
     cssnext({
-      browsers: ['last 2 versions', 'IE > 10'],
-    }),
-  ],
+      browsers: ['last 2 versions', 'IE > 10']
+    })
+  ]
 };
