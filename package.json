@@ -22,7 +22,7 @@
     "coercer": "^1.1.2",
     "compression": "^1.6.2",
     "cross-spawn": "4.0.0",
-    "css-loader": "0.23.1",
+    "css-loader": "0.28.0",
     "enhanced-resolve": "^3.0.3",
     "eslint-config-xo-react": "^0.10.0",
     "eslint-import-resolver-webpack": "^0.8.1",
