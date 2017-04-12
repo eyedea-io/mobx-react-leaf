@@ -64,7 +64,7 @@
     "classnames": "^2.2.5",
     "hoist-non-react-statics": "^1.2.0",
     "mobx": "^3.0.2",
-    "mobx-react": "^4.1.0",
+    "mobx-react": "^4.1.8",
     "react": "^15.3.1",
     "react-dom": "^15.3.1",
     "react-router": "^4.0.0-2"
