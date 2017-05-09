@@ -43,7 +43,7 @@
     "postcss-cssnext": "^2.7.0",
     "postcss-focus": "^1.0.0",
     "postcss-import": "^9.0.0",
-    "postcss-loader": "^1.2.1",
+    "postcss-loader": "^2.0.3",
     "postcss-nested": "^1.0.0",
     "promise": "7.1.1",
     "react-hot-loader": "^3.0.0-alpha.8",
