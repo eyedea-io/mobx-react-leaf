@@ -42,7 +42,7 @@
     "object-assign": "4.1.0",
     "postcss-cssnext": "^2.7.0",
     "postcss-focus": "^1.0.0",
-    "postcss-import": "^9.0.0",
+    "postcss-import": "^10.0.0",
     "postcss-loader": "^1.2.1",
     "postcss-nested": "^1.0.0",
     "promise": "7.1.1",
