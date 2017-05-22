@@ -48,7 +48,7 @@
     "promise": "7.1.1",
     "react-hot-loader": "^3.0.0-alpha.8",
     "recursive-readdir": "2.1.0",
-    "rimraf": "2.5.4",
+    "rimraf": "2.6.0",
     "strip-ansi": "3.0.1",
     "style-loader": "0.13.1",
     "url-loader": "0.5.7",
