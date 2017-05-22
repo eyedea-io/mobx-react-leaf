@@ -55,7 +55,7 @@
     "webpack": "beta",
     "webpack-dev-middleware": "^1.7.0",
     "webpack-hot-middleware": "^2.12.2",
-    "whatwg-fetch": "2.0.1",
+    "whatwg-fetch": "2.0.3",
     "xo": "^0.17.1",
     "xo-loader": "^0.8.0",
     "z-schema": "^3.17.0"
